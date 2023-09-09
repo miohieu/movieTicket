@@ -4,7 +4,7 @@ import { UserLogin } from 'types/UserManagement'
 
 
 const api = apiInstance({
-    baseURL: import.meta.env.VITE_QUAN_LY_NGUOI_DUNG_API,
+    baseURL: import.meta.env.VITE_QUAN_LY_NGUOI_DUNG_API
 })
 
 export const quanLyNguoiDungServices = {

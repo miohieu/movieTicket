@@ -1,9 +1,9 @@
 export type UserLogin = {
-    content:ContentType
-}
-
-export interface ContentType {
-    taiKhoan: string
+taiKhoan: string
     hoTen: string
     email: string
-}
+    soDT: string
+    maNhom: string
+    maLoaiNguoiDung: 'KhachHang' | 'QuanTri'
+    accessToken: string}
+

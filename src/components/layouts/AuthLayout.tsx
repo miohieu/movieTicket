@@ -1,6 +1,13 @@
-import { Outlet } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
+import { useAuth } from 'hooks'
 
 export const AuthLayout = () => {
+    const {accessToken} = useAuth()
+
+    if(accessToken) {
+        return <Navigate to='/' />
+    }
+
     return (
         <div className="AuthLayout h-full">
             <div className="h-screen w-screen relative ">

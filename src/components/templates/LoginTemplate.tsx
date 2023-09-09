@@ -1,8 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input, Button } from 'components'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 import { LoginSchema, LoginSchemaType } from 'schema'
-import { useAppDispatch } from 'store'
+import { useAppDispatch, useAppSelector } from 'store'
+import { loginThunk } from 'store/quanLyNguoiDung'
 
 export const LoginTemplate = () => {
     const {
@@ -13,11 +16,16 @@ export const LoginTemplate = () => {
         mode: 'onChange',
         resolver: zodResolver(LoginSchema),
     })
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+    const isFetching = useAppSelector(state => state.quanLyNguoiDung.isFetching)
 
     const onSubmit: SubmitHandler<LoginSchemaType> = (value) => {
-        console.log('value: ', value)
+        dispatch(loginThunk(value)).unwrap().then(() => { 
+            toast.success('dang nhap thanh cong')
+            navigate('/') })
+        .catch((err)=>console.log(err))
     }
-    const dispatch = useAppDispatch()
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -42,7 +50,9 @@ export const LoginTemplate = () => {
                 register={register}
             />
 
-            <Button className="!w-full !h-[48px] !mt-20" htmlType="submit" type="primary" danger>
+            <Button className="!w-full !h-[48px] !mt-20" htmlType="submit" type="primary" 
+            loading={isFetching}
+            danger>
                 Đăng nhập
             </Button>
         </form>

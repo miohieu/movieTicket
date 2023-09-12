@@ -1,9 +1,18 @@
 import styled from "styled-components"
 
-import { NavLink } from 'react-router-dom'
-import { Button, Input } from '.'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { Button, Input, Avatar, Popover } from '.'
+import { PATH } from "constant"
+import { useAuth } from "hooks"
+import { useAppDispatch, useAppSelector } from "store"
+import { quanLyNguoiDungActions } from "store/quanLyNguoiDung"
 
 export const Header = () => {
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+    const { accessToken } = useAuth()
+    const user = useAppSelector(state => state.quanLyNguoiDung.userLogin)
+
     return (
         <Container>
             <div className="header-content">
@@ -24,16 +33,46 @@ export const Header = () => {
                         </Button>
                     </div>
                     <div>
-                        <p className="flex items-center font-600">
-                            <i className="fa-solid fa-user text-20"></i>
-                            <span className="ml-10 cursor-pointer hover:text-[var(--primary-color)]">
-                                Đăng nhập
-                            </span>
-                            <span className="inline-block h-[24px] w-[2px] bg-black mx-6"></span>
-                            <span className="cursor-pointer hover:text-[var(--primary-color)]">
-                                Đăng ký
-                            </span>
-                        </p>
+                        {
+                            accessToken ?
+
+                                <Popover content={
+                                    <div className="px-20 py-10 text-left">
+                                        <p className="font-700"> {user?.taiKhoan} </p>
+                                        <hr />
+                                        <div className="my-16">
+                                            <p className="cursor-pointer hover:text-teal-600">Thong tin tai khoan</p>
+                                        </div>
+                                        <div className="my-16">
+                                            <Button className="!h-[46px]" danger 
+                                            onClick={() => dispatch(quanLyNguoiDungActions.logout())}>
+                                                <i className="fa-solid fa-right-from-bracket"></i>
+                                                Dang xuat
+                                            </Button>
+                                        </div>
+                                    </div>
+                                }
+                                    trigger={"click"}
+                                    arrow={false}
+                                >
+                                    <Avatar size="large"> <i className="fa-regular fa-user text-20"></i>
+
+                                    </Avatar>
+                                </Popover>
+                                : <p className="flex items-center font-600">
+                                    <i className="fa-solid fa-user text-20"></i>
+                                    <span className="ml-10 cursor-pointer hover:text-[var(--primary-color)]"
+                                        onClick={() => navigate(PATH.login)}>
+                                        Đăng nhập
+                                    </span>
+                                    <span className="inline-block h-[24px] w-[2px] bg-black mx-6"></span>
+                                    <span className="cursor-pointer hover:text-[var(--primary-color)]"
+                                        onClick={() => navigate(PATH.register)}>
+                                        Đăng ký
+                                    </span>
+                                </p>
+
+                        }
                     </div>
                 </div>
             </div>

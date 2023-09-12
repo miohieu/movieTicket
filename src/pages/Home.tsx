@@ -1,8 +1,9 @@
-import { HomeTemplate } from "components"
+import { HomeTemplate, MovieShowCase} from "components"
+
 
 const Home = () => {
   return (
-  <HomeTemplate/>
+  <HomeTemplate children={<MovieShowCase/>}/>
   )
 }
 

@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { LoginSchema, LoginSchemaType } from 'schema'
 import { useAppDispatch, useAppSelector } from 'store'
 import { loginThunk } from 'store/quanLyNguoiDung'
+import { handleError } from 'utils'
 
 export const LoginTemplate = () => {
     const {
@@ -22,9 +23,9 @@ export const LoginTemplate = () => {
 
     const onSubmit: SubmitHandler<LoginSchemaType> = (value) => {
         dispatch(loginThunk(value)).unwrap().then(() => { 
-            toast.success('dang nhap thanh cong')
+            toast.success('Dang nhap thanh cong')
             navigate('/') })
-        .catch((err)=>console.log(err))
+        .catch((err)=>handleError(err))
     }
 
     return (

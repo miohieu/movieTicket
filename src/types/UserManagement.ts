@@ -1,9 +1,18 @@
 export type UserLogin = {
-taiKhoan: string
+    taiKhoan: string
     hoTen: string
     email: string
     soDT: string
     maNhom: string
     maLoaiNguoiDung: 'KhachHang' | 'QuanTri'
-    accessToken: string}
+    accessToken: string
+}
+
+
+export type UserByAccessTokenProp = Omit<UserLogin, 'accessToken'> & {
+    thongTinDatVe?: []
+    loaiNguoiDung: {
+        maLoaiNguoiDung: "KhachHang" | "QuanTri"
+    }
+}
 

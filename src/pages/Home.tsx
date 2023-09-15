@@ -1,10 +1,11 @@
-import { HomeTemplate, MovieShowCase} from "components"
+
+import { HomeTemplate } from "components"
 
 
 const Home = () => {
-  return (
-  <HomeTemplate children={<MovieShowCase/>}/>
-  )
+    return (
+        <HomeTemplate />
+    )
 }
 
 export default Home

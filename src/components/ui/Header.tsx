@@ -6,6 +6,8 @@ import { PATH } from "constant"
 import { useAuth } from "hooks"
 import { useAppDispatch, useAppSelector } from "store"
 import { quanLyNguoiDungActions } from "store/quanLyNguoiDung"
+import { useEffect, useState } from "react"
+import classNames from "classnames"
 
 export const Header = () => {
     const navigate = useNavigate()
@@ -13,11 +15,31 @@ export const Header = () => {
     const { accessToken } = useAuth()
     const user = useAppSelector(state => state.quanLyNguoiDung.userLogin)
 
+    const [isScroll, setScroll] = useState<boolean>(false);
+
+    const handleScroll = () => {
+        if (window.scrollY > 100) {
+            setScroll(true)
+        }
+        return
+    }
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+
+    }, [])
+
+
     return (
         <Container>
             <div className="header-content">
-                <h1 className="brand">
-                    <span className="text-[var(--primary-color)]">CYBER</span>MOVIE
+                <h1 className="brand"
+                    onClick={() => navigate('/')}
+                >
+                    <span className="text-[var(--primary-color)]"
+                    >CYBER</span>MOVIE
                 </h1>
                 <div className="flex items-center gap-[60px]">
                     <nav>
@@ -41,11 +63,14 @@ export const Header = () => {
                                         <p className="font-700"> {user?.taiKhoan} </p>
                                         <hr />
                                         <div className="my-16">
-                                            <p className="cursor-pointer hover:text-teal-600">Thong tin tai khoan</p>
+                                            <p className="cursor-pointer hover:text-teal-600"
+                                                onClick={() => { navigate(PATH.account) }}
+                                            >Thong tin tai khoan</p>
+
                                         </div>
                                         <div className="my-16">
-                                            <Button className="!h-[46px]" danger 
-                                            onClick={() => dispatch(quanLyNguoiDungActions.logout())}>
+                                            <Button className="!h-[46px]" danger
+                                                onClick={() => dispatch(quanLyNguoiDungActions.logout())}>
                                                 <i className="fa-solid fa-right-from-bracket"></i>
                                                 Dang xuat
                                             </Button>
@@ -85,7 +110,9 @@ const Container = styled.header`
     height: var(--header-height);
     box-shadow: 0px 16px 10px -5px rgba(0, 0, 0, 0.1);
     
+
     .header-content {
+    
         padding: 0 40px;
         max-width: var(--max-width);
         height: 100%;

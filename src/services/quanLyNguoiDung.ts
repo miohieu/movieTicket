@@ -1,5 +1,6 @@
 import { apiInstance } from 'constant/apiInstance'
 import { LoginSchemaType, RegisterSchemaType } from 'schema'
+import { AccountSchemaType } from 'schema/AccountSchema'
 import { UserByAccessTokenProp, UserLogin } from 'types/UserManagement'
 
 
@@ -13,4 +14,7 @@ export const quanLyNguoiDungServices = {
     login: (data: LoginSchemaType) => api.post<APIResponse<UserLogin>>('/DangNhap', data),
 
     getUserByAccessToken: () => api.post<APIResponse<UserByAccessTokenProp>>('/ThongTinTaiKhoan'),
+
+    updateUser: (data: AccountSchemaType) => api.put('/CapNhatThongTinNguoiDung', data)
+
 }

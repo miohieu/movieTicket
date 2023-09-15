@@ -27,7 +27,7 @@ export const Input = ({
     return (
         <div className={className}>
             {!!label && (
-                <label className="text-white" htmlFor={id}>
+                <label className="text-black" htmlFor={id}>
                     {label}
                 </label>
             )}

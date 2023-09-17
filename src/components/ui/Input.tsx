@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HTMLInputTypeAttribute } from 'react'
 import { UseFormRegister } from 'react-hook-form'
-
+import styled from 'styled-components'
+import cn from 'classnames'
 //rafc
 type InputProps = {
     label?: string
@@ -12,6 +13,7 @@ type InputProps = {
     placeholder?: string
     className?: string
     name?: string
+    disable?: boolean
 }
 
 export const Input = ({
@@ -23,6 +25,7 @@ export const Input = ({
     placeholder,
     className = '',
     name,
+    disable
 }: InputProps) => {
     return (
         <div className={className}>
@@ -35,10 +38,37 @@ export const Input = ({
                 id={id}
                 placeholder={placeholder}
                 type={type}
-                className="p-10 mt-8 w-full text-white rounded-6 bg-[#333]"
+                className={
+                    cn({
+                        "p-10 mt-8 w-full text-white rounded-6": true,
+                        "disabled-input": disable
+
+                    })
+                }
                 {...register?.(name)}
+                disabled={disable}
             />
             {!!error && <p className="text-red-500 text-14">{error}</p>}
         </div>
     )
 }
+export const InputS = styled(Input)`
+
+label {
+    color: #B35252;
+    font-size: 17px
+}
+
+input {
+    &.disabled-input {
+        background-color: #cccccc;
+    }
+
+    padding: 10px 20px;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+
+}
+`

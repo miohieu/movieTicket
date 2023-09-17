@@ -7,7 +7,7 @@ import { useAuth } from "hooks"
 import { useAppDispatch, useAppSelector } from "store"
 import { quanLyNguoiDungActions } from "store/quanLyNguoiDung"
 import { useEffect, useState } from "react"
-import classNames from "classnames"
+import cn from "classnames"
 
 export const Header = () => {
     const navigate = useNavigate()
@@ -20,9 +20,12 @@ export const Header = () => {
     const handleScroll = () => {
         if (window.scrollY > 100) {
             setScroll(true)
+                return
         }
-        return
+        setScroll(false)
     }
+    console.log(isScroll);
+    
     useEffect(() => {
         window.addEventListener("scroll", handleScroll)
         return () => {
@@ -33,7 +36,9 @@ export const Header = () => {
 
 
     return (
-        <Container>
+        <Container className={cn({
+                    'header-fixed': isScroll
+                })}>
             <div className="header-content">
                 <h1 className="brand"
                     onClick={() => navigate('/')}
@@ -110,9 +115,15 @@ const Container = styled.header`
     height: var(--header-height);
     box-shadow: 0px 16px 10px -5px rgba(0, 0, 0, 0.1);
     
-
+&.header-fixed {
+    position: fixed;
+    width:100%;
+    z-index: 999;
+    background-color: #fff
+}
     .header-content {
     
+
         padding: 0 40px;
         max-width: var(--max-width);
         height: 100%;

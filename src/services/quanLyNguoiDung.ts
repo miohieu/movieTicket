@@ -15,6 +15,6 @@ export const quanLyNguoiDungServices = {
 
     getUserByAccessToken: () => api.post<APIResponse<UserByAccessTokenProp>>('/ThongTinTaiKhoan'),
 
-    updateUser: (data: AccountSchemaType) => api.put('/CapNhatThongTinNguoiDung', data)
+    updateUser: (data: AccountSchemaType) => api.put<APIResponse<AccountSchemaType>>('/CapNhatThongTinNguoiDung', data)
 
 }

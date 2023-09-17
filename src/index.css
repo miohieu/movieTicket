@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.text-title {
+    @apply text-xl p-[10px]
+}

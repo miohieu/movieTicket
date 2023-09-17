@@ -1,12 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {  createSlice } from "@reduxjs/toolkit";
 import { Movie } from 'types/Movie'
 import { getMovieListThunk } from "./thunk";
 
 type MovieInitialState = {
-    movieList?: Movie[]
+    movieList?:Movie[]
     isFetchingMovie?: boolean
-
-
 }
 
 const initialState: MovieInitialState = {
@@ -22,7 +20,7 @@ const quanLyPhimSlice = createSlice({
     extraReducers(builder) {
         builder
         .addCase(getMovieListThunk.fulfilled, (state, {payload})=> {
-            state.movieList = payload
+            state.movieList = payload 
             state.isFetchingMovie = false
         })
         .addCase(getMovieListThunk.pending, (state) => {

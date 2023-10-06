@@ -6,7 +6,7 @@ import { PATH } from "constant"
 import { useAuth } from "hooks"
 import { useAppDispatch, useAppSelector } from "store"
 import { quanLyNguoiDungActions } from "store/quanLyNguoiDung"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import cn from "classnames"
 
 export const Header = () => {
@@ -17,14 +17,22 @@ export const Header = () => {
 
     const [isScroll, setScroll] = useState<boolean>(false);
 
+    const [_searchInput, setSearchInput] = useState("")
+
     const handleScroll = () => {
         if (window.scrollY > 100) {
             setScroll(true)
-                return
+            return
         }
         setScroll(false)
     }
-    
+
+    const handleSearch = (e :React.SyntheticEvent) => {
+
+        const value = e.target as HTMLInputElement;
+        setSearchInput(value.value.toLowerCase());
+    };
+
     useEffect(() => {
         window.addEventListener("scroll", handleScroll)
         return () => {
@@ -36,8 +44,8 @@ export const Header = () => {
 
     return (
         <Container className={cn({
-                    'header-fixed': isScroll
-                })}>
+            'header-fixed': isScroll
+        })}>
             <div className="header-content">
                 <h1 className="brand"
                     onClick={() => navigate('/')}
@@ -53,7 +61,8 @@ export const Header = () => {
                         <NavLink to="">TIN TỨC</NavLink>
                     </nav>
                     <div className="search">
-                        <Input placeholder="Tìm kiếm tên phim" />
+                        <Input placeholder="Tìm kiếm tên phim"
+                            handleChange={handleSearch} />
                         <Button>
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </Button>

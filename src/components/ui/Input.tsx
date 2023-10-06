@@ -3,7 +3,7 @@ import { HTMLInputTypeAttribute } from 'react'
 import { UseFormRegister } from 'react-hook-form'
 import styled from 'styled-components'
 import cn from 'classnames'
-//rafc
+//
 type InputProps = {
     label?: string
     id?: string
@@ -14,6 +14,7 @@ type InputProps = {
     className?: string
     name?: string
     disable?: boolean
+    handleChange?:(e: React.SyntheticEvent) => void
 }
 
 export const Input = ({
@@ -25,7 +26,9 @@ export const Input = ({
     placeholder,
     className = '',
     name,
-    disable
+    disable,
+    handleChange
+
 }: InputProps) => {
     return (
         <div className={className}>
@@ -47,6 +50,7 @@ export const Input = ({
                 }
                 {...register?.(name)}
                 disabled={disable}
+                onChange={handleChange}
             />
             {!!error && <p className="text-red-500 text-14">{error}</p>}
         </div>

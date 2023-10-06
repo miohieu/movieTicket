@@ -43,7 +43,7 @@ export const Input = ({
                 type={type}
                 className={
                     cn({
-                        "p-10 mt-8 w-full text-white rounded-6": true,
+                        "p-10 mt-8 w-full text-black rounded-6": true,
                         "disabled-input": disable
 
                     })

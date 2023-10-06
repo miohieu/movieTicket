@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { quanLyPhimService, quanLyRapService } from "services";
-import { Movie } from "types/Movie";
+import { Movie, Rap } from "types/Movie";
 import { PosterFilm } from "components";
 export const MovieTemplate = () => {
 
     const { id } = useParams()
 
     const [movie, setMovie] = useState<Movie>()
-    const [movieSchedule, setMovieSchedule] = useState<[]>()
+    const [movieSchedule, setMovieSchedule] = useState<Rap>()
 
     async function getMovie(id: string) {
         try {
@@ -23,7 +23,9 @@ export const MovieTemplate = () => {
     async function getSchedule(id: string) {
         try {
             const schedule = await quanLyRapService.getMovieScheduleByID(id)
-            setMovieSchedule(schedule.data.content.heThongRapChieu)
+            console.log(schedule.data.content)
+            setMovieSchedule(schedule.data.content)
+
         } catch (err) {
             console.log(err);
 
@@ -45,7 +47,7 @@ export const MovieTemplate = () => {
                 desc={movie?.moTa}
             />
 
-            <div>{}</div>
+            <div>{movieSchedule?.heThongRapChieu.map(e=> e.hinhAnh)}</div>
 
         </div>
     )

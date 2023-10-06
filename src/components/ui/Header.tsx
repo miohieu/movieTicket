@@ -24,7 +24,6 @@ export const Header = () => {
         }
         setScroll(false)
     }
-    console.log(isScroll);
     
     useEffect(() => {
         window.addEventListener("scroll", handleScroll)

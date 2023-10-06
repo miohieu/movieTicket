@@ -5,7 +5,7 @@ import { Login, Register } from 'pages'
 import Home from 'pages/Home'
 import MainLayout from 'components/layouts/MainLayout'
 import Account from 'pages/Account'
-
+import MovieDetail from 'pages/MovieDetail'
 export const router: RouteObject[] = [
     {
         path: PATH.home,
@@ -18,7 +18,12 @@ export const router: RouteObject[] = [
             {
                 path: PATH.account,
                 element: <Account/>
-            }
+            },
+
+            {
+                path: `${PATH.movie}`,
+                element: <MovieDetail/>
+            },
         ]
     },
     {

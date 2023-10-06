@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 .text-title {
-    @apply text-xl p-[10px]
+    @apply text-xl p-[10px] font-[900]
 }
+

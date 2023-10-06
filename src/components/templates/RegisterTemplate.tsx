@@ -37,7 +37,7 @@ export const RegisterTemplate = () => {
     }
 
     return (
-        <form className="text-white" onSubmit={handleSubmit(onSubmit)}>
+        <form className="text-black" onSubmit={handleSubmit(onSubmit)}>
             <h2 className="font-600 text-30">Đăng ký</h2>
             <Input
                 className="mt-16"

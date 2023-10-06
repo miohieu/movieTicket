@@ -5,7 +5,7 @@ import { UserByAccessTokenProp, UserLogin } from 'types/UserManagement'
 import { APIResponse } from 'types/APIResponse'
 
 const api = apiInstance({
-    baseURL: import.meta.env.example.VITE_QUAN_LY_NGUOI_DUNG_API
+    baseURL: import.meta.env.VITE_QUAN_LY_NGUOI_DUNG_API
 })
 
 export const quanLyNguoiDungServices = {
